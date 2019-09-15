@@ -1,3 +1,9 @@
+
+## Explanation
+This is a repository forked to analyze the behavior of Tensorflow-ROCm of Tensoflow for AMD
+Recoded /src/hpara.py and /src/modle.py for behavior analysis
+
+
 # WAVEGLOW
 This is a tensorflow implementation of [NVIDIA/waveglow](https://github.com/NVIDIA/waveglow).
 Now some samples at step 592k are at */step_592k_samples*.
