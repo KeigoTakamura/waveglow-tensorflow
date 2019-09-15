@@ -1,4 +1,5 @@
 import tensorflow as tf
+from tensorflow.python.client import timeline
 import os
 import traceback
 from tqdm import tqdm
@@ -93,6 +94,8 @@ class WaveGlow():
 
         self.sample(0)
         try:
+            run_options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+            run_metadata = tf.RunMetadata()
             for epoch in range(start_epoch, args.epoch):
                 clr = self.sess.run(self.lr)
                 print ("Current learning rate: %.6e" %clr)
@@ -111,11 +114,20 @@ class WaveGlow():
                                                                                                 self.prior_loss,
                                                                                                 self.merged,
                                                                                                 self.global_step],
-                                                                                                feed_dict=feed_dict)
+                                                                                                feed_dict=feed_dict,
+                                                                                                options=run_options,
+                                                                                                run_metadata=run_metadata)
                     self.gate_add_summary(summary, step)
                     buffers.put([loss, logs_loss, logdet_loss, prior_loss], [0, 1, 2, 3])
                     if (batch + 1) % args.display_step == 0:
                         buffers.printout([epoch + 1, batch + 1, num_batch])
+                    if batch == 20:
+                        step_stats = run_metadata.step_stats
+                        tl = timeline.Timeline(step_stats)
+                        ctf = tl.generate_chrome_trace_format(show_memory=False,
+                                      show_dataflow=True)
+                        with open("timeline.json", "w") as f:
+                            f.write(ctf)
                 if (epoch + 1) % args.saving_epoch == 0 and args.saving_path:
                     try :
                         self.save(epoch + 1)
