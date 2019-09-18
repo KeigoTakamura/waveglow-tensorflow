@@ -1,8 +1,10 @@
 
 ## Explanation
-This is a repository forked to analyze the behavior of Tensorflow-ROCm of Tensoflow for AMD
-Recoded /src/hpara.py and /src/modle.py for behavior analysis
 
+This is a repository branched to analyze the behavior of Tensoflow for AMD Recoded's Tensorflow-ROCm, and /src/hpara.py and /src/modle.py have been recoded for behavior analysis.
+
+Read the documentation on the tensorflow timeline for more details
+https://riptutorial.com/ja/tensorflow/example/13324/tensorflow%E3%81%AEtimeline%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BE%8B
 
 # WAVEGLOW
 This is a tensorflow implementation of [NVIDIA/waveglow](https://github.com/NVIDIA/waveglow).
